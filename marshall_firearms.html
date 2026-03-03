@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Marshall Firearms — Townsend, Tennessee | GTA City RP</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@300;400;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0a0a0b;--bg2:#111114;--bg3:#161619;--border:#2a2a30;--gold:#c8a84b;--gold2:#e8c96a;--red:#c0392b;--text:#e8e0d0;--muted:#7a7a85;--accent:#3d8c6e}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:'Barlow Condensed',sans-serif;overflow-x:hidden}
+body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");pointer-events:none;z-index:9999;opacity:.5}
+::-webkit-scrollbar{width:3px}::-webkit-scrollbar-track{background:var(--bg)}::-webkit-scrollbar-thumb{background:var(--gold)}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 40px;height:60px;background:rgba(10,10,11,.96);border-bottom:1px solid var(--border);backdrop-filter:blur(12px)}
+.logo{display:flex;align-items:center;gap:12px;text-decoration:none}
+.logo-icon{width:30px;height:30px}
+.logo-text{font-family:'Bebas Neue',sans-serif;font-size:19px;letter-spacing:3px;color:var(--gold);line-height:1}
+.logo-sub{font-family:'Share Tech Mono',monospace;font-size:8px;color:var(--muted);letter-spacing:2px}
+.nav-links{display:flex;gap:28px;list-style:none}
+.nav-links a{font-size:12px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color .2s}
+.nav-links a:hover{color:var(--gold)}
+.btn-discord{display:flex;align-items:center;gap:8px;padding:7px 18px;background:#5865F2;color:#fff;font-family:'Barlow Condensed',sans-serif;font-size:12px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;border:none;cursor:pointer;clip-path:polygon(6px 0%,100% 0%,calc(100% - 6px) 100%,0% 100%);transition:background .2s}
+.btn-discord:hover{background:#4752c4}
+
+/* HERO */
+.hero{position:relative;min-height:100vh;display:flex;align-items:center;overflow:hidden}
+.hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse 60% 80% at 70% 50%,rgba(200,168,75,.06) 0%,transparent 70%),radial-gradient(ellipse 40% 40% at 20% 80%,rgba(192,57,43,.07) 0%,transparent 60%),linear-gradient(160deg,#0a0a0b 0%,#0f0f12 50%,#080810 100%)}
+.hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(200,168,75,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(200,168,75,.04) 1px,transparent 1px);background-size:60px 60px;mask-image:radial-gradient(ellipse at center,black 20%,transparent 80%)}
+.hero-content{position:relative;z-index:1;padding:120px 80px 80px;max-width:680px}
+.hero-tag{display:inline-flex;align-items:center;gap:8px;padding:4px 12px;border:1px solid var(--border);background:rgba(200,168,75,.08);font-family:'Share Tech Mono',monospace;font-size:10px;color:var(--gold);letter-spacing:3px;text-transform:uppercase;margin-bottom:24px}
+.hero-tag::before{content:'';width:6px;height:6px;background:var(--gold);border-radius:50%;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(.7)}}
+.hero h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(60px,10vw,110px);line-height:.9;letter-spacing:4px;margin-bottom:20px}
+.hero h1 span{display:block;color:var(--gold);text-shadow:0 0 60px rgba(200,168,75,.4)}
+.hero-desc{font-size:16px;font-weight:300;color:var(--muted);line-height:1.7;max-width:460px;margin-bottom:36px}
+.hero-actions{display:flex;gap:14px;flex-wrap:wrap}
+.btn-primary{padding:13px 32px;background:var(--gold);color:#0a0a0b;font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:700;letter-spacing:2px;text-transform:uppercase;border:none;cursor:pointer;clip-path:polygon(8px 0%,100% 0%,calc(100% - 8px) 100%,0% 100%);transition:background .2s,transform .1s;text-decoration:none;display:inline-flex;align-items:center}
+.btn-primary:hover{background:var(--gold2);transform:translateY(-2px)}
+.btn-outline{padding:13px 32px;background:transparent;color:var(--text);font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:600;letter-spacing:2px;text-transform:uppercase;border:1px solid var(--border);cursor:pointer;clip-path:polygon(8px 0%,100% 0%,calc(100% - 8px) 100%,0% 100%);transition:border-color .2s,color .2s,transform .1s;text-decoration:none;display:inline-flex;align-items:center}
+.btn-outline:hover{border-color:var(--gold);color:var(--gold);transform:translateY(-2px)}
+.hero-stats{position:absolute;right:80px;bottom:80px;display:flex;gap:48px}
+.stat-num{font-family:'Bebas Neue',sans-serif;font-size:44px;color:var(--gold);line-height:1;letter-spacing:2px}
+.stat-label{font-size:10px;font-weight:600;letter-spacing:2px;color:var(--muted);text-transform:uppercase}
+
+/* SECTIONS */
+section{padding:80px 60px}
+#catalogue{background:var(--bg2)}
+#munitions{background:var(--bg3)}
+#contrats{background:var(--bg)}
+#fidelite{background:var(--bg2)}
+.section-header{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:44px;border-bottom:1px solid var(--border);padding-bottom:18px}
+.section-tag{font-family:'Share Tech Mono',monospace;font-size:10px;color:var(--gold);letter-spacing:3px;text-transform:uppercase;margin-bottom:6px}
+.section-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(32px,5vw,56px);letter-spacing:3px;line-height:1}
+.section-count{font-family:'Share Tech Mono',monospace;font-size:11px;color:var(--muted);letter-spacing:2px}
+
+/* FILTERS */
+.cat-nav{display:flex;gap:6px;margin-bottom:28px;flex-wrap:wrap}
+.cat-btn{padding:6px 16px;background:transparent;border:1px solid var(--border);color:var(--muted);font-family:'Barlow Condensed',sans-serif;font-size:12px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;cursor:pointer;transition:all .2s;clip-path:polygon(4px 0%,100% 0%,calc(100% - 4px) 100%,0% 100%);white-space:nowrap}
+.cat-btn:hover,.cat-btn.active{background:var(--gold);border-color:var(--gold);color:#0a0a0b}
+
+/* LEGEND */
+.legend{display:flex;gap:20px;flex-wrap:wrap;margin-bottom:20px}
+.legend-item{display:flex;align-items:center;gap:6px;font-family:'Share Tech Mono',monospace;font-size:10px;color:var(--muted);letter-spacing:1px}
+
+/* TABLE */
+.weapons-table-wrap{overflow-x:auto}
+.weapons-table{width:100%;border-collapse:collapse;font-size:13px}
+.weapons-table thead tr{border-bottom:2px solid var(--gold)}
+.weapons-table th{padding:11px 14px;text-align:left;font-family:'Share Tech Mono',monospace;font-size:10px;color:var(--gold);letter-spacing:2px;text-transform:uppercase;font-weight:400;white-space:nowrap}
+.weapons-table td{padding:10px 14px;border-bottom:1px solid var(--border);vertical-align:middle}
+.weapons-table tbody tr{transition:background .15s}
+.weapons-table tbody tr:hover{background:rgba(200,168,75,.04)}
+.td-name{font-weight:600;letter-spacing:.5px}
+.td-cat-label{display:inline-block;padding:2px 8px;font-family:'Share Tech Mono',monospace;font-size:9px;letter-spacing:1px;text-transform:uppercase}
+.cat-auto{background:rgba(192,57,43,.2);color:#e74c3c;border:1px solid rgba(192,57,43,.3)}
+.cat-semi{background:rgba(61,140,110,.2);color:#5dbf96;border:1px solid rgba(61,140,110,.3)}
+.cat-unknown{background:rgba(122,122,133,.15);color:var(--muted);border:1px solid var(--border)}
+.td-price{font-family:'Bebas Neue',sans-serif;font-size:18px;color:var(--gold);letter-spacing:1px;white-space:nowrap}
+.td-cal{font-family:'Share Tech Mono',monospace;font-size:10px;color:var(--muted);white-space:nowrap}
+.td-mag{font-family:'Share Tech Mono',monospace;font-size:11px;color:var(--text)}
+.td-marge{font-family:'Share Tech Mono',monospace;font-size:10px;color:var(--accent)}
+.spec-badge{display:inline-flex;align-items:center;gap:3px;padding:1px 7px;margin-left:6px;font-family:'Share Tech Mono',monospace;font-size:8px;letter-spacing:1px;background:rgba(74,111,165,.2);color:#7aa8de;border:1px solid rgba(74,111,165,.35);text-transform:uppercase;vertical-align:middle}
+.btn-add-sm{padding:5px 14px;background:transparent;border:1px solid var(--border);color:var(--muted);font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;cursor:pointer;clip-path:polygon(3px 0%,100% 0%,calc(100% - 3px) 100%,0% 100%);transition:all .2s;white-space:nowrap}
+.btn-add-sm:hover{background:var(--gold);border-color:var(--gold);color:#0a0a0b}
+.cat-header-row td{padding:8px 14px;background:rgba(200,168,75,.06);font-family:'Bebas Neue',sans-serif;font-size:15px;letter-spacing:3px;color:var(--gold);border-bottom:1px solid rgba(200,168,75,.2);border-top:2px solid rgba(200,168,75,.15)}
+.cat-header-row .marge-tag{font-family:'Share Tech Mono',monospace;font-size:9px;letter-spacing:2px;color:var(--muted);font-weight:400;margin-left:12px;vertical-align:middle}
+
+/* PRODUCTS */
+.products-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:14px}
+.product-card{border:1px solid var(--border);padding:22px;background:var(--bg2);transition:border-color .2s,transform .2s;cursor:pointer}
+.product-card:hover{border-color:rgba(200,168,75,.4);transform:translateY(-3px)}
+.product-icon{font-size:26px;margin-bottom:10px;display:block}
+.product-name{font-family:'Bebas Neue',sans-serif;font-size:19px;letter-spacing:2px;margin-bottom:3px}
+.product-sub{font-family:'Share Tech Mono',monospace;font-size:9px;color:var(--muted);letter-spacing:2px;margin-bottom:12px}
+.product-price{font-family:'Bebas Neue',sans-serif;font-size:22px;color:var(--gold);letter-spacing:1px}
+.product-marge{font-size:10px;color:var(--accent);font-family:'Share Tech Mono',monospace;letter-spacing:1px;margin-top:2px}
+
+/* CONTRATS */
+.contracts-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(275px,1fr));gap:18px}
+.contract-card{position:relative;border:1px solid var(--border);padding:30px;background:var(--bg3);transition:border-color .3s,transform .3s;overflow:hidden}
+.contract-card::before{content:'';position:absolute;top:0;left:0;width:3px;height:100%}
+.contract-card.bronze::before{background:#cd7f32}
+.contract-card.silver::before{background:#a8a9ad}
+.contract-card.gold::before{background:var(--gold)}
+.contract-card.platinum::before{background:linear-gradient(to bottom,#e5e4e2,#a0b2c8,#e5e4e2)}
+.contract-card:hover{border-color:rgba(200,168,75,.4);transform:translateY(-4px)}
+.contract-tier{font-family:'Share Tech Mono',monospace;font-size:9px;letter-spacing:3px;text-transform:uppercase;margin-bottom:9px}
+.contract-card.bronze .contract-tier{color:#cd7f32}
+.contract-card.silver .contract-tier{color:#a8a9ad}
+.contract-card.gold .contract-tier{color:var(--gold)}
+.contract-card.platinum .contract-tier{color:#a0b2c8}
+.contract-name{font-family:'Bebas Neue',sans-serif;font-size:32px;letter-spacing:3px;margin-bottom:4px}
+.contract-sub{font-size:12px;color:var(--muted);margin-bottom:22px}
+.contract-price{font-family:'Bebas Neue',sans-serif;font-size:42px;letter-spacing:2px;line-height:1;margin-bottom:4px}
+.contract-card.bronze .contract-price{color:#cd7f32}
+.contract-card.silver .contract-price{color:#a8a9ad}
+.contract-card.gold .contract-price{color:var(--gold)}
+.contract-card.platinum .contract-price{color:#a0b2c8}
+.contract-period{font-size:11px;color:var(--muted);letter-spacing:1px;margin-bottom:22px}
+.contract-features{list-style:none;margin-bottom:26px}
+.contract-features li{font-size:13px;color:var(--text);padding:7px 0;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px}
+.contract-features li::before{content:'✓';font-family:'Share Tech Mono',monospace;font-size:10px;color:var(--accent);flex-shrink:0}
+.contract-features li.no{color:var(--muted)}
+.contract-features li.no::before{content:'×';color:var(--muted)}
+.btn-contract{width:100%;padding:12px;background:transparent;border:1px solid var(--border);color:var(--text);font-family:'Barlow Condensed',sans-serif;font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase;cursor:pointer;transition:all .2s;clip-path:polygon(8px 0%,100% 0%,calc(100% - 8px) 100%,0% 100%)}
+.contract-card.gold .btn-contract{background:var(--gold);border-color:var(--gold);color:#0a0a0b}
+.btn-contract:hover{border-color:var(--gold);color:var(--gold)}
+.contract-card.gold .btn-contract:hover{background:var(--gold2);color:#0a0a0b}
+.contract-best{position:absolute;top:20px;right:-30px;background:var(--gold);color:#0a0a0b;font-family:'Share Tech Mono',monospace;font-size:8px;letter-spacing:1px;padding:4px 40px;transform:rotate(45deg)}
+
+/* FIDÉLITÉ */
+.loyalty-layout{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:start}
+.loyalty-card-3d{perspective:1000px}
+.loyalty-card{width:100%;aspect-ratio:1.586;background:linear-gradient(135deg,#1a1a14 0%,#2a2010 40%,#1a1a14 100%);border:1px solid var(--gold);border-radius:12px;padding:26px;position:relative;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,.8),inset 0 1px 0 rgba(200,168,75,.2),0 0 40px rgba(200,168,75,.1);transform:rotateY(-8deg) rotateX(4deg);transition:transform .4s;cursor:pointer}
+.loyalty-card:hover{transform:rotateY(0) rotateX(0)}
+.loyalty-card::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(45deg,transparent,transparent 2px,rgba(200,168,75,.015) 2px,rgba(200,168,75,.015) 4px)}
+.loyalty-card::after{content:'';position:absolute;width:160px;height:160px;border-radius:50%;background:radial-gradient(circle,rgba(200,168,75,.12),transparent 70%);right:-30px;bottom:-30px}
+.card-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:18px;position:relative;z-index:1}
+.card-brand{font-family:'Bebas Neue',sans-serif;font-size:17px;letter-spacing:3px;color:var(--gold)}
+.card-brand-sub{font-family:'Share Tech Mono',monospace;font-size:7px;color:var(--muted);letter-spacing:2px}
+.card-chip{width:38px;height:26px;background:linear-gradient(135deg,#c8a84b,#8a6520);border-radius:3px}
+.card-points{position:relative;z-index:1;margin-bottom:10px}
+.points-label{font-family:'Share Tech Mono',monospace;font-size:7px;color:var(--muted);letter-spacing:3px;text-transform:uppercase;margin-bottom:2px}
+.points-value{font-family:'Bebas Neue',sans-serif;font-size:42px;color:var(--gold);letter-spacing:4px;line-height:1;text-shadow:0 0 30px rgba(200,168,75,.5)}
+.points-value span{font-size:16px;opacity:.7}
+.card-progress{position:relative;z-index:1;margin-bottom:14px}
+.progress-track{height:2px;background:rgba(255,255,255,.1);border-radius:2px;margin-bottom:4px}
+.progress-fill{height:100%;background:linear-gradient(to right,var(--gold),var(--gold2));width:68%}
+.progress-labels{display:flex;justify-content:space-between;font-family:'Share Tech Mono',monospace;font-size:7px;color:var(--muted)}
+.card-bottom{display:flex;justify-content:space-between;align-items:flex-end;position:relative;z-index:1}
+.card-holder-label{font-size:7px;color:var(--muted);font-family:'Share Tech Mono',monospace;margin-bottom:2px}
+.card-holder-name{font-family:'Share Tech Mono',monospace;font-size:11px;letter-spacing:2px}
+.card-level{padding:3px 12px;font-family:'Bebas Neue',sans-serif;font-size:13px;letter-spacing:3px;background:var(--gold);color:#0a0a0b;clip-path:polygon(5px 0%,100% 0%,calc(100% - 5px) 100%,0% 100%)}
+.loyalty-info h3{font-family:'Bebas Neue',sans-serif;font-size:28px;letter-spacing:3px;margin-bottom:12px;color:var(--gold)}
+.loyalty-info p{font-size:14px;color:var(--muted);line-height:1.7;margin-bottom:24px}
+.loyalty-tiers{display:flex;flex-direction:column;gap:9px;margin-bottom:26px}
+.tier-row{display:flex;align-items:center;gap:12px;padding:11px 16px;border:1px solid var(--border);background:var(--bg3)}
+.tier-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.tier-row:nth-child(1) .tier-dot{background:#cd7f32;box-shadow:0 0 6px #cd7f32}
+.tier-row:nth-child(2) .tier-dot{background:#a8a9ad;box-shadow:0 0 6px #a8a9ad}
+.tier-row:nth-child(3) .tier-dot{background:var(--gold);box-shadow:0 0 6px var(--gold)}
+.tier-row:nth-child(4) .tier-dot{background:#a0b2c8;box-shadow:0 0 6px #a0b2c8}
+.tier-name{font-family:'Bebas Neue',sans-serif;font-size:17px;letter-spacing:2px;flex:1}
+.tier-pts{font-family:'Share Tech Mono',monospace;font-size:9px;color:var(--muted);margin-right:12px}
+.tier-discount{font-family:'Bebas Neue',sans-serif;font-size:20px;color:var(--gold);letter-spacing:2px}
+
+/* MODAL */
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.85);backdrop-filter:blur(8px);z-index:1000;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .3s}
+.modal-overlay.active{opacity:1;pointer-events:all}
+.modal{background:var(--bg3);border:1px solid var(--border);width:420px;position:relative;clip-path:polygon(16px 0%,100% 0%,calc(100% - 16px) 100%,0% 100%);padding:44px;transform:translateY(16px);transition:transform .3s}
+.modal-overlay.active .modal{transform:translateY(0)}
+.modal-close{position:absolute;top:14px;right:20px;background:none;border:none;color:var(--muted);font-size:22px;cursor:pointer;transition:color .2s}
+.modal-close:hover{color:var(--text)}
+.modal-icon{width:50px;height:50px;background:#5865F2;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 18px}
+.modal h2{font-family:'Bebas Neue',sans-serif;font-size:30px;letter-spacing:3px;text-align:center;margin-bottom:8px}
+.modal p{font-size:13px;color:var(--muted);text-align:center;line-height:1.6;margin-bottom:26px}
+.discord-login-btn{width:100%;padding:14px;background:#5865F2;color:#fff;font-family:'Barlow Condensed',sans-serif;font-size:14px;font-weight:700;letter-spacing:2px;text-transform:uppercase;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:12px;clip-path:polygon(8px 0%,100% 0%,calc(100% - 8px) 100%,0% 100%);transition:background .2s;margin-bottom:14px}
+.discord-login-btn:hover{background:#4752c4}
+.modal-note{font-size:10px;color:var(--muted);text-align:center;line-height:1.5}
+.modal-note span{color:var(--gold)}
+
+/* FOOTER */
+footer{background:var(--bg);border-top:1px solid var(--border);padding:52px 60px 26px}
+.footer-top{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:44px;margin-bottom:36px}
+.footer-brand p{font-size:12px;color:var(--muted);line-height:1.7;margin-top:12px;max-width:240px}
+.footer-col h4{font-family:'Share Tech Mono',monospace;font-size:9px;letter-spacing:3px;color:var(--gold);text-transform:uppercase;margin-bottom:16px}
+.footer-col ul{list-style:none}
+.footer-col ul li{margin-bottom:8px}
+.footer-col ul li a{font-size:13px;color:var(--muted);text-decoration:none;transition:color .2s}
+.footer-col ul li a:hover{color:var(--text)}
+.footer-bottom{display:flex;justify-content:space-between;align-items:center;border-top:1px solid var(--border);padding-top:18px}
+.footer-bottom p{font-family:'Share Tech Mono',monospace;font-size:9px;color:var(--muted);letter-spacing:2px}
+.footer-server{display:flex;align-items:center;gap:8px;font-family:'Share Tech Mono',monospace;font-size:9px;color:var(--muted)}
+.server-dot{width:5px;height:5px;background:var(--accent);border-radius:50%;animation:pulse 2s infinite}
+
+/* TOAST */
+.toast{position:fixed;bottom:28px;right:28px;padding:14px 22px;background:var(--bg3);border:1px solid var(--gold);border-left:3px solid var(--gold);font-family:'Barlow Condensed',sans-serif;font-size:13px;z-index:9998;transform:translateX(200px);opacity:0;transition:all .3s;max-width:300px}
+.toast.show{transform:translateX(0);opacity:1}
+.toast-title{color:var(--gold);font-family:'Share Tech Mono',monospace;font-size:9px;letter-spacing:2px;text-transform:uppercase;margin-bottom:3px}
+
+/* ANIM */
+.fade-up{opacity:0;transform:translateY(22px);transition:opacity .5s ease,transform .5s ease}
+.fade-up.visible{opacity:1;transform:translateY(0)}
+
+@media(max-width:900px){nav{padding:0 16px}.nav-links{display:none}section{padding:56px 16px}.hero-content{padding:100px 16px 56px}.hero-stats{position:static;padding:28px 16px}.loyalty-layout,.footer-top{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="logo" href="#home">
+    <svg class="logo-icon" viewBox="0 0 30 30" fill="none">
+      <path d="M4 25L15 5L26 25H4Z" stroke="#c8a84b" stroke-width="1.5" fill="none"/>
+      <path d="M10 25L15 14L20 25H10Z" fill="#c8a84b" opacity="0.22"/>
+      <line x1="15" y1="5" x2="15" y2="1" stroke="#c8a84b" stroke-width="1.8"/>
+      <circle cx="15" cy="0.8" r="1.5" fill="#c8a84b"/>
+    </svg>
+    <div>
+      <div class="logo-text">Marshall Firearms</div>
+      <div class="logo-sub">Townsend, TN · GTA City RP S2</div>
+    </div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#catalogue">Catalogue</a></li>
+    <li><a href="#munitions">Munitions</a></li>
+    <li><a href="#contrats">Contrats</a></li>
+    <li><a href="#fidelite">Fidélité</a></li>
+  </ul>
+  <button class="btn-discord" onclick="openModal()">
+    <svg width="16" height="12" viewBox="0 0 16 12" fill="white"><path d="M13.55 1.06A13.3 13.3 0 0 0 10.28 0c-.14.26-.3.6-.41.88a12.4 12.4 0 0 0-3.74 0A9.3 9.3 0 0 0 5.71 0 13.4 13.4 0 0 0 2.44 1.07C.35 4.2-.22 7.25.07 10.26a13.42 13.42 0 0 0 4.1 2.09 10.2 10.2 0 0 0 .88-1.44 8.7 8.7 0 0 1-1.38-.67l.33-.26a9.6 9.6 0 0 0 8.23 0l.34.26c-.44.27-.9.5-1.39.68.26.51.55 1 .88 1.44a13.38 13.38 0 0 0 4.1-2.1c.34-3.5-.59-6.52-2.56-9.2ZM5.35 8.43c-.8 0-1.47-.75-1.47-1.66 0-.9.65-1.66 1.47-1.66.81 0 1.48.74 1.47 1.66 0 .91-.66 1.66-1.47 1.66Zm5.3 0c-.81 0-1.47-.75-1.47-1.66 0-.9.64-1.66 1.47-1.66.81 0 1.47.74 1.47 1.66 0 .91-.65 1.66-1.47 1.66Z"/></svg>
+    Connexion Discord
+  </button>
+</nav>
+
+<section class="hero" id="home">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-content fade-up">
+    <div class="hero-tag">GTA City RP · Serveur 2 · Townsend, Tennessee</div>
+    <h1>MARSHALL<span>FIREARMS</span>CO.</h1>
+    <p class="hero-desc">L'armurerie de référence du comté de Blaine. Arsenal complet, discrétion totale. Nous fournissons, vous décidez.</p>
+    <div class="hero-actions">
+      <a href="#catalogue" class="btn-primary">Voir le Catalogue</a>
+      <a href="#contrats" class="btn-outline">Nos Contrats</a>
+    </div>
+  </div>
+  <div class="hero-stats">
+    <div><div class="stat-num">56+</div><div class="stat-label">Références</div></div>
+    <div><div class="stat-num">7</div><div class="stat-label">Catégories</div></div>
+    <div><div class="stat-num">24/7</div><div class="stat-label">Disponible</div></div>
+  </div>
+</section>
+
+<section id="catalogue">
+  <div class="section-header fade-up">
+    <div>
+      <div class="section-tag">// Section 01</div>
+      <div class="section-title">Catalogue Armes</div>
+    </div>
+    <div class="section-count" id="weaponCount">56 références</div>
+  </div>
+  <div class="legend fade-up">
+    <div class="legend-item"><span class="td-cat-label cat-semi" style="font-size:8px">Semi</span>Semi-automatique</div>
+    <div class="legend-item"><span class="td-cat-label cat-auto" style="font-size:8px">Auto</span>Automatique</div>
+    <div class="legend-item"><span class="spec-badge">Spécialiste</span>Vendeur spécialisé requis</div>
+  </div>
+  <div class="cat-nav fade-up">
+    <button class="cat-btn active" onclick="filterCat('all',this)">Toutes (56)</button>
+    <button class="cat-btn" onclick="filterCat('pistolet',this)">Pistolets (13)</button>
+    <button class="cat-btn" onclick="filterCat('revolver',this)">Revolvers (4)</button>
+    <button class="cat-btn" onclick="filterCat('smg',this)">SMG (6)</button>
+    <button class="cat-btn" onclick="filterCat('assaut',this)">Fusils d'assaut (21)</button>
+    <button class="cat-btn" onclick="filterCat('precision',this)">Précision (5)</button>
+    <button class="cat-btn" onclick="filterCat('pompe',this)">Pompe (7)</button>
+  </div>
+  <div class="weapons-table-wrap fade-up">
+    <table class="weapons-table">
+      <thead>
+        <tr>
+          <th>Modèle</th>
+          <th>Mode</th>
+          <th>Calibre</th>
+          <th>Chargeur</th>
+          <th>Prix de vente</th>
+          <th>Marge</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody id="weaponsTbody"></tbody>
+    </table>
+  </div>
+</section>
+
+<section id="munitions">
+  <div class="section-header fade-up">
+    <div>
+      <div class="section-tag">// Section 02</div>
+      <div class="section-title">Munitions & Équipements</div>
+    </div>
+    <div class="section-count">8 références</div>
+  </div>
+  <div class="products-grid">
+    <div class="product-card fade-up" onclick="addToCart('Munitions Pistolet')"><span class="product-icon">🔴</span><div class="product-name">Mun. Pistolet</div><div class="product-sub">9mm / .45 ACP / 5.7mm</div><div class="product-price">83 $</div><div class="product-marge">Marge : 34%</div></div>
+    <div class="product-card fade-up" onclick="addToCart('Munitions .357 Magnum')"><span class="product-icon">🟠</span><div class="product-name">Mun. .357</div><div class="product-sub">.357 Magnum</div><div class="product-price">99 $</div><div class="product-marge">Marge : 34%</div></div>
+    <div class="product-card fade-up" onclick="addToCart('Munitions SMG')"><span class="product-icon">🟡</span><div class="product-name">Mun. SMG</div><div class="product-sub">9mm / .45 ACP / 4.6mm</div><div class="product-price">143 $</div><div class="product-marge">Marge : 34%</div></div>
+    <div class="product-card fade-up" onclick="addToCart('Munitions Pompe')"><span class="product-icon">🔵</span><div class="product-name">Mun. Pompe</div><div class="product-sub">Calibre 12</div><div class="product-price">110 $</div><div class="product-marge">Marge : 34%</div></div>
+    <div class="product-card fade-up" onclick="addToCart('Munitions Assaut')"><span class="product-icon">⚫</span><div class="product-name">Mun. Assaut</div><div class="product-sub">5.56 / 7.62 / 5.45mm</div><div class="product-price">198 $</div><div class="product-marge">Marge : 34%</div></div>
+    <div class="product-card fade-up" onclick="addToCart('Munitions Sniper')"><span class="product-icon">🎯</span><div class="product-name">Mun. Sniper</div><div class="product-sub">7.62×51mm / .50 BMG</div><div class="product-price">275 $</div><div class="product-marge">Marge : 34%</div></div>
+    <div class="product-card fade-up" onclick="addToCart('Gilet pare-balles léger')"><span class="product-icon">🛡️</span><div class="product-name">Gilet Léger</div><div class="product-sub">Protection NIJ Lvl II</div><div class="product-price">3 300 $</div><div class="product-marge">Marge : 10%</div></div>
+    <div class="product-card fade-up" onclick="addToCart('Gilet pare-balles lourd')"><span class="product-icon">🦺</span><div class="product-name">Gilet Lourd</div><div class="product-sub">Protection NIJ Lvl IIIA</div><div class="product-price">6 600 $</div><div class="product-marge">Marge : 10%</div></div>
+  </div>
+</section>
+
+<section id="contrats">
+  <div class="section-header fade-up">
+    <div>
+      <div class="section-tag">// Section 03</div>
+      <div class="section-title">Contrats & Partenariats</div>
+    </div>
+    <div class="section-count">2 types de contrats</div>
+  </div>
+  <div class="contracts-grid" style="grid-template-columns:repeat(auto-fill,minmax(340px,1fr))">
+    <div class="contract-card silver fade-up">
+      <div class="contract-tier">Contrat Particulier</div>
+      <div class="contract-name">PARTICULIER</div>
+      <div class="contract-sub">Pour les acheteurs individuels souhaitant bénéficier de tarifs préférentiels</div>
+      <div class="contract-price" style="font-size:32px;margin-bottom:6px">Tarifs préférentiels</div>
+      <div class="contract-period">Contrat individuel · Accès intra-net Discord requis</div>
+      <ul class="contract-features">
+        <li>Marge divisée par 2 sur tous les achats</li>
+        <li>Munitions offertes à chaque commande</li>
+        <li>Accès aux commandes via l'intra-net (Discord)</li>
+        <li>Accès aux batteuses : Minimi, RPK-12 & MG36</li>
+        <li>Commandes prioritaires</li>
+      </ul>
+      <button class="btn-contract" onclick="openModal()">Souscrire via Discord</button>
+    </div>
+    <div class="contract-card gold fade-up" style="overflow:hidden">
+      <div class="contract-best">Recommandé</div>
+      <div class="contract-tier">Contrat Entreprise</div>
+      <div class="contract-name">ENTREPRISE</div>
+      <div class="contract-sub">Pour les organisations, gangs et sociétés souhaitant s'approvisionner régulièrement</div>
+      <div class="contract-price" style="font-size:32px;margin-bottom:6px">Tarifs entreprise</div>
+      <div class="contract-period">Contrat collectif · Accès intra-net Discord requis</div>
+      <ul class="contract-features">
+        <li>Marge divisée par 2 sur tous les achats</li>
+        <li>Munitions offertes à chaque commande</li>
+        <li>Accès aux commandes via l'intra-net (Discord)</li>
+        <li>Commandes prioritaires</li>
+        <li class="no">Accès batteuses (Particulier uniquement)</li>
+      </ul>
+      <button class="btn-contract" onclick="openModal()">Souscrire via Discord</button>
+    </div>
+  </div>
+</section>
+
+<section id="fidelite">
+  <div class="section-header fade-up">
+    <div>
+      <div class="section-tag">// Section 04</div>
+      <div class="section-title">Programme Fidélité</div>
+    </div>
+    <div class="section-count">Marshall Rewards</div>
+  </div>
+  <div class="loyalty-layout">
+    <div class="loyalty-card-3d fade-up">
+      <div class="loyalty-card" id="loyaltyCard">
+        <div class="card-top">
+          <div><div class="card-brand">Marshall</div><div class="card-brand-sub">Firearms Co. · Rewards</div></div>
+          <div class="card-chip"></div>
+        </div>
+        <div class="card-points">
+          <div class="points-label">Points cumulés</div>
+          <div class="points-value" id="cardPoints">2 450 <span>pts</span></div>
+        </div>
+        <div class="card-progress">
+          <div class="progress-track"><div class="progress-fill"></div></div>
+          <div class="progress-labels"><span>Argent · 0 pts</span><span>Or · 3 600 pts</span></div>
+        </div>
+        <div class="card-bottom">
+          <div><div class="card-holder-label">Titulaire</div><div class="card-holder-name" id="cardName">Connectez-vous</div></div>
+          <div class="card-level" id="cardLevel">ARGENT</div>
+        </div>
+      </div>
+    </div>
+    <div class="loyalty-info fade-up">
+      <h3>Cumulez des avantages</h3>
+      <p>Chaque achat chez Marshall Firearms vous rapporte des points. Montez en grade pour débloquer des avantages exclusifs : accès prioritaire, livraisons offertes, équipements bonus — sans jamais impacter le prix affiché.</p>
+      <div class="loyalty-tiers">
+        <div class="tier-row"><div class="tier-dot"></div><div class="tier-name">Bronze</div><div class="tier-pts">0 – 1 000 pts</div><div style="flex:1"></div><div style="font-family:'Barlow Condensed',sans-serif;font-size:13px;color:var(--text);text-align:right">Livraison prioritaire</div></div>
+        <div class="tier-row"><div class="tier-dot"></div><div class="tier-name">Argent</div><div class="tier-pts">1 000 – 3 600 pts</div><div style="flex:1"></div><div style="font-family:'Barlow Condensed',sans-serif;font-size:13px;color:var(--text);text-align:right">+ 1 boîte mun. offerte/mois</div></div>
+        <div class="tier-row"><div class="tier-dot"></div><div class="tier-name">Or</div><div class="tier-pts">3 600 – 8 000 pts</div><div style="flex:1"></div><div style="font-family:'Barlow Condensed',sans-serif;font-size:13px;color:var(--text);text-align:right">+ Accès stock exclusif</div></div>
+        <div class="tier-row"><div class="tier-dot"></div><div class="tier-name">Platinium</div><div class="tier-pts">8 000+ pts</div><div style="flex:1"></div><div style="font-family:'Barlow Condensed',sans-serif;font-size:13px;color:var(--text);text-align:right">+ Gilet lourd offert/mois</div></div>
+      </div>
+      <p style="font-size:11px;color:var(--muted);font-family:'Share Tech Mono',monospace;letter-spacing:1px;border:1px solid var(--border);padding:10px 14px;margin-bottom:20px">
+        ⚠ La carte fidélité ne génère aucune remise commerciale. Les avantages sont exclusivement des services et équipements offerts.
+      </p>
+      <button class="btn-primary" onclick="openModal()">Activer ma carte</button>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <div style="font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:3px;color:var(--gold)">Marshall Firearms</div>
+      <div style="font-family:'Share Tech Mono',monospace;font-size:8px;color:var(--muted);letter-spacing:2px;margin-top:2px">Townsend, Tennessee · GTA City RP · Serveur 2</div>
+      <p>L'armurerie la plus fiable du comté de Blaine. Qualité militaire, discrétion totale.</p>
+    </div>
+    <div class="footer-col"><h4>Navigation</h4><ul><li><a href="#catalogue">Catalogue</a></li><li><a href="#munitions">Munitions</a></li><li><a href="#contrats">Contrats</a></li><li><a href="#fidelite">Fidélité</a></li></ul></div>
+    <div class="footer-col"><h4>Services</h4><ul><li><a href="#">Livraison discrète</a></li><li><a href="#">Commandes spéciales</a></li><li><a href="#">Partenariats</a></li><li><a href="#">Contrat Warlord</a></li></ul></div>
+    <div class="footer-col"><h4>Contact</h4><ul><li><a href="#" onclick="openModal();return false">Discord</a></li><li><a href="#">F.A.Q</a></li><li><a href="#">Règlement</a></li><li><a href="#">Recrutement</a></li></ul></div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2025 Marshall Firearms Co. · Fiction GTA City RP · Tous droits réservés</p>
+    <div class="footer-server"><div class="server-dot"></div>Serveur 2 · En ligne</div>
+  </div>
+</footer>
+
+<div class="modal-overlay" id="loginModal" onclick="closeModalOut(event)">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal()">×</button>
+    <div class="modal-icon">
+      <svg width="24" height="18" viewBox="0 0 24 18" fill="white"><path d="M20.32 1.56A19.8 19.8 0 0 0 15.32 0c-.2.37-.44.87-.6 1.26a18.3 18.3 0 0 0-5.52 0A14 14 0 0 0 8.58 0 19.9 19.9 0 0 0 3.57 1.57C.46 6.2-.28 10.72.09 15.17a17.8 17.8 0 0 0 5.44 2.77c.44-.6.84-1.24 1.18-1.92a11.6 11.6 0 0 1-1.86-.9l.45-.35a12.7 12.7 0 0 0 10.87 0l.46.35c-.58.34-1.2.66-1.87.9.35.68.74 1.32 1.18 1.92a17.7 17.7 0 0 0 5.44-2.77c.45-5.29-.76-9.78-3.06-13.61ZM8.02 12.43c-1.08 0-1.98-.99-1.98-2.2s.87-2.2 1.98-2.2c1.1 0 1.98.99 1.97 2.2s-.87 2.2-1.97 2.2Zm7.96 0c-1.08 0-1.97-.99-1.97-2.2s.87-2.2 1.97-2.2c1.1 0 1.98.99 1.97 2.2s-.87 2.2-1.97 2.2Z"/></svg>
+    </div>
+    <h2>Connexion</h2>
+    <p>Connectez-vous avec Discord pour accéder à votre espace Marshall Firearms et gérer votre carte de fidélité.</p>
+    <button class="discord-login-btn" onclick="simulateLogin()">
+      <svg width="20" height="15" viewBox="0 0 20 15" fill="white"><path d="M16.93 1.28A16.6 16.6 0 0 0 12.74 0c-.18.31-.37.74-.51 1.07a15.4 15.4 0 0 0-4.63 0A11.8 11.8 0 0 0 7.1 0 16.6 16.6 0 0 0 2.9 1.28C.42 5.27-.26 9.16.07 12.97a14.9 14.9 0 0 0 4.61 2.34c.38-.51.71-1.05 1-1.62-.63-.23-1.23-.52-1.8-.87l.39-.3a10.9 10.9 0 0 0 9.47 0l.39.3c-.57.35-1.17.64-1.8.87.29.57.62 1.11 1 1.62a14.9 14.9 0 0 0 4.61-2.34c.38-4.46-.64-8.32-2.81-11.69ZM6.68 10.62c-.93 0-1.7-.84-1.7-1.88s.75-1.88 1.7-1.88c.94 0 1.7.84 1.7 1.88s-.75 1.88-1.7 1.88Zm6.63 0c-.93 0-1.7-.84-1.7-1.88s.75-1.88 1.7-1.88c.95 0 1.7.84 1.7 1.88s-.75 1.88-1.7 1.88Z"/></svg>
+      Se connecter avec Discord
+    </button>
+    <p class="modal-note">En vous connectant, vous acceptez les <span>conditions d'utilisation</span> de Marshall Firearms Co. · Serveur fictif GTA City RP S2.</p>
+  </div>
+</div>
+
+<div class="toast" id="toast"><div class="toast-title" id="toastTitle">Notification</div><div id="toastMsg"></div></div>
+
+<script>
+const WEAPONS=[
+  {cat:'pistolet',name:'MK23',type:'Semi',cal:'45 .ACP',mag:'12+1',price:4950,spec:false},
+  {cat:'pistolet',name:'M9',type:'Semi',cal:'9×19mm',mag:'15+1',price:4950,spec:false},
+  {cat:'pistolet',name:'P320',type:'Semi',cal:'9×19mm',mag:'17+1',price:4950,spec:false},
+  {cat:'pistolet',name:'FNP-45',type:'Semi',cal:'45 .ACP',mag:'15+1 / 18+1',price:4950,spec:false},
+  {cat:'pistolet',name:'Glock 19',type:'Semi',cal:'9×19mm',mag:'15+1',price:4950,spec:false},
+  {cat:'pistolet',name:'Five-seveN MK2',type:'Semi',cal:'5.7×28mm',mag:'20+1',price:4950,spec:false},
+  {cat:'pistolet',name:'Glock 17',type:'Semi',cal:'9×19mm',mag:'17+1',price:4950,spec:false},
+  {cat:'pistolet',name:'CZ 75',type:'Semi',cal:'9×19mm',mag:'12+1',price:4950,spec:false},
+  {cat:'pistolet',name:'Colt M45',type:'Semi',cal:'45 .ACP',mag:'8+1',price:4950,spec:false},
+  {cat:'pistolet',name:'P99',type:'Semi',cal:'9×19mm',mag:'15+1',price:3850,spec:false},
+  {cat:'pistolet',name:'USP',type:'Semi',cal:'9×19mm',mag:'15+1',price:4950,spec:true},
+  {cat:'pistolet',name:'SW659',type:'Semi',cal:'9×19mm',mag:'14+1',price:4950,spec:true},
+  {cat:'pistolet',name:'KNW',type:'Semi',cal:'45 .ACP',mag:'15+1',price:4950,spec:true},
+  {cat:'revolver',name:'MR 96',type:'Semi',cal:'.357 Magnum',mag:'6',price:4950,spec:false},
+  {cat:'revolver',name:'MR 73',type:'Semi',cal:'.357 Magnum',mag:'6',price:3850,spec:false},
+  {cat:'revolver',name:'Desert Eagle',type:'Semi',cal:'.357 Magnum',mag:'7+1',price:4950,spec:true},
+  {cat:'revolver',name:'Taurus Cobra',type:'Semi',cal:'.357 Magnum',mag:'6',price:4950,spec:true},
+  {cat:'smg',name:'MP5',type:'Auto',cal:'9×19mm',mag:'30+1',price:13200,spec:false},
+  {cat:'smg',name:'UMP-45',type:'Auto',cal:'45 .ACP',mag:'25+1',price:13200,spec:false},
+  {cat:'smg',name:'MP7',type:'Auto',cal:'4.6×30mm',mag:'40+1',price:9900,spec:false},
+  {cat:'smg',name:'Kriss Vector',type:'Auto',cal:'9×19mm',mag:'30+1',price:13200,spec:true},
+  {cat:'smg',name:'MP9',type:'Auto',cal:'9×19mm',mag:'30+1',price:9900,spec:true},
+  {cat:'smg',name:'Uzi',type:'Auto',cal:'9×19mm',mag:'32+1',price:8800,spec:true},
+  {cat:'assaut',name:'RFB',type:'Auto',cal:'7.62×51mm',mag:'20+1',price:49500,spec:false},
+  {cat:'assaut',name:'Scar-H',type:'Auto',cal:'7.62×51mm',mag:'20+1',price:24200,spec:false},
+  {cat:'assaut',name:'Scar-L',type:'Auto',cal:'5.56×45mm',mag:'30+1',price:16500,spec:false},
+  {cat:'assaut',name:'MK 18',type:'Auto',cal:'5.56×45mm',mag:'30+1',price:16500,spec:false},
+  {cat:'assaut',name:'MK 18 Mod',type:'Auto',cal:'5.56×45mm',mag:'30+1',price:16500,spec:false},
+  {cat:'assaut',name:'M4A1',type:'Auto',cal:'5.56×45mm',mag:'30+1',price:16500,spec:false},
+  {cat:'assaut',name:'AR-15',type:'Auto',cal:'5.56×45mm',mag:'30+1',price:16500,spec:false},
+  {cat:'assaut',name:'HK 416',type:'Auto',cal:'5.56×45mm',mag:'30+1',price:16500,spec:false},
+  {cat:'assaut',name:'G36C',type:'Auto',cal:'5.56×45mm',mag:'30+1',price:16500,spec:false},
+  {cat:'assaut',name:'CZ 805',type:'Auto',cal:'7.62×39mm',mag:'30+1',price:16500,spec:false},
+  {cat:'assaut',name:'F90 MBR',type:'Auto',cal:'5.56×45mm',mag:'35+1',price:16500,spec:false},
+  {cat:'assaut',name:'ACR',type:'Auto',cal:'5.56×45mm',mag:'30+1',price:16500,spec:false},
+  {cat:'assaut',name:'SKS',type:'Semi',cal:'5.56×45mm',mag:'20+1',price:49500,spec:true},
+  {cat:'assaut',name:'Minimi',type:'Auto',cal:'5.56×45mm',mag:'100+1',price:33000,spec:true},
+  {cat:'assaut',name:'RPK-12',type:'Auto',cal:'—',mag:'—',price:33000,spec:true},
+  {cat:'assaut',name:'MG36',type:'Auto',cal:'5.56×45mm',mag:'100+1',price:33000,spec:true},
+  {cat:'assaut',name:'FN FAL',type:'Auto',cal:'7.62×51mm',mag:'20+1',price:17600,spec:true},
+  {cat:'assaut',name:'Abakan',type:'Auto',cal:'5.45×39mm',mag:'30+1',price:16500,spec:true},
+  {cat:'assaut',name:'Galil',type:'Auto',cal:'5.56×45mm',mag:'35+1',price:16500,spec:true},
+  {cat:'assaut',name:'AK-400',type:'Auto',cal:'5.45×39mm',mag:'30+1',price:16500,spec:true},
+  {cat:'assaut',name:'AK-103',type:'Auto',cal:'7.62×39mm',mag:'30+1',price:16500,spec:true},
+  {cat:'precision',name:'Warface',type:'—',cal:'—',mag:'—',price:52500,spec:false},
+  {cat:'precision',name:'M24',type:'Semi',cal:'7.62×51mm',mag:'5',price:52500,spec:false},
+  {cat:'precision',name:'M40 A1',type:'Semi',cal:'7.62×51mm',mag:'6',price:52500,spec:false},
+  {cat:'precision',name:'M98',type:'—',cal:'—',mag:'—',price:52500,spec:true},
+  {cat:'precision',name:'M82',type:'Semi',cal:'.50 BMG',mag:'10+1',price:52500,spec:true},
+  {cat:'pompe',name:'M870',type:'Semi',cal:'Calibre 12',mag:'8 / 5',price:13200,spec:false},
+  {cat:'pompe',name:'Nova',type:'Semi',cal:'Calibre 12',mag:'8',price:13200,spec:false},
+  {cat:'pompe',name:'M590',type:'Semi',cal:'Calibre 12',mag:'9',price:13200,spec:false},
+  {cat:'pompe',name:'M500',type:'Semi',cal:'Calibre 12',mag:'6',price:14300,spec:true},
+  {cat:'pompe',name:'SPAS-12',type:'Semi',cal:'Calibre 12',mag:'9',price:13200,spec:true},
+  {cat:'pompe',name:'Fort 500',type:'Semi',cal:'Calibre 12',mag:'7',price:13200,spec:true},
+  {cat:'pompe',name:'Toz 194',type:'Semi',cal:'Calibre 12',mag:'7',price:13200,spec:true},
+];
+
+const CAT_META={
+  pistolet:{label:'Pistolets',marge:'10%'},
+  revolver:{label:'Revolvers',marge:'10%'},
+  smg:{label:'Pistolets-mitrailleurs (SMG)',marge:'10%'},
+  assaut:{label:"Fusils d'assaut",marge:'10%'},
+  precision:{label:'Fusils de précision',marge:'5%'},
+  pompe:{label:'Fusils à pompe',marge:'10%'},
+};
+const CAT_ORDER=['pistolet','revolver','smg','assaut','precision','pompe'];
+
+function renderTable(filter){
+  const tbody=document.getElementById('weaponsTbody');
+  tbody.innerHTML='';
+  let lastCat=null,count=0;
+  CAT_ORDER.forEach(cat=>{
+    const items=WEAPONS.filter(w=>w.cat===cat&&(filter==='all'||filter===cat));
+    if(!items.length)return;
+    const meta=CAT_META[cat];
+    const hrow=document.createElement('tr');
+    hrow.className='cat-header-row';
+    hrow.innerHTML=`<td colspan="7">${meta.label.toUpperCase()}<span class="marge-tag">· Marge ${meta.marge}</span></td>`;
+    tbody.appendChild(hrow);
+    items.forEach(w=>{
+      count++;
+      const tr=document.createElement('tr');
+      const tc=w.type==='Auto'?'cat-auto':w.type==='Semi'?'cat-semi':'cat-unknown';
+      const sb=w.spec?`<span class="spec-badge">Spécialiste</span>`:'';
+      const p=w.price.toLocaleString('fr-FR');
+      const m=cat==='precision'?'5%':'10%';
+      tr.innerHTML=`<td class="td-name">${w.name}${sb}</td><td><span class="td-cat-label ${tc}">${w.type}</span></td><td class="td-cal">${w.cal}</td><td class="td-mag">${w.mag}</td><td class="td-price">${p}&nbsp;$<span style="font-family:'Share Tech Mono',monospace;font-size:8px;color:var(--muted);margin-left:4px">HT</span></td><td class="td-marge">${m}</td><td><button class="btn-add-sm" onclick="addToCart('${w.name}')">Commander</button></td>`;
+      tbody.appendChild(tr);
+    });
+  });
+  document.getElementById('weaponCount').textContent=count+' références';
+}
+
+function filterCat(cat,btn){
+  document.querySelectorAll('.cat-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  renderTable(cat);
+}
+
+function openModal(){document.getElementById('loginModal').classList.add('active')}
+function closeModal(){document.getElementById('loginModal').classList.remove('active')}
+function closeModalOut(e){if(e.target===document.getElementById('loginModal'))closeModal()}
+
+const USERS=['MarcusV_RP','ShadowBlade47','CactusJack_TN','NightOwl_RP','Ghost_Rider99'];
+function simulateLogin(){
+  const n=USERS[Math.floor(Math.random()*USERS.length)];
+  document.getElementById('cardName').textContent=n;
+  closeModal();
+  showToast('Connexion réussie','Bienvenue, '+n+' ! Votre carte est active.');
+}
+
+function showToast(title,msg){
+  const t=document.getElementById('toast');
+  document.getElementById('toastTitle').textContent=title;
+  document.getElementById('toastMsg').textContent=msg;
+  t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),3500);
+}
+
+function addToCart(n){showToast('Commande enregistrée',n+' ajouté à votre panier.')}
+
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach((e,i)=>{if(e.isIntersecting)setTimeout(()=>e.target.classList.add('visible'),i*70)});
+},{threshold:0.08});
+document.querySelectorAll('.fade-up').forEach(el=>obs.observe(el));
+
+const card=document.getElementById('loyaltyCard');
+card.addEventListener('mousemove',e=>{
+  const r=card.getBoundingClientRect();
+  const x=(e.clientX-r.left)/r.width-.5;
+  const y=(e.clientY-r.top)/r.height-.5;
+  card.style.transform=`rotateY(${x*20}deg) rotateX(${-y*10}deg)`;
+});
+card.addEventListener('mouseleave',()=>{card.style.transform='rotateY(-8deg) rotateX(4deg)'});
+
+renderTable('all');
+</script>
+</body>
+</html>
