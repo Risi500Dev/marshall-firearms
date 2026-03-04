@@ -125,92 +125,29 @@ function MG_today() {
 }
 function MG_invoiceId() { return 'MF-' + Date.now().toString(36).toUpperCase().slice(-6); }
 
-// ── DB — JSONBin.io (base partagée entre tous les navigateurs)
-// Bin ID et Master Key à configurer ci-dessous après création sur jsonbin.io
-const MG_BIN_ID    = '';   // ex: '65f3a...' — créer sur https://jsonbin.io
-const MG_BIN_KEY   = '';   // Master Key JSONBin (commence par $2b$...)
+// ── DB
+const MG_DB_KEY      = 'mg_db_v1';
 const MG_SESSION_KEY = 'mg_session_v1';
-const MG_CACHE_KEY   = 'mg_db_cache_v1';  // cache local pour les lectures rapides
 
-const MG_BIN_URL   = () => `https://api.jsonbin.io/v3/b/${MG_BIN_ID}`;
-const MG_HEADERS   = () => ({ 'Content-Type':'application/json', 'X-Master-Key': MG_BIN_KEY });
-
-// ── Cache local (évite les appels réseau redondants)
-function MG_getCached() {
-  try { const r=localStorage.getItem(MG_CACHE_KEY); return r?JSON.parse(r):null; } catch(e){return null;}
-}
-function MG_setCache(db) {
-  try { localStorage.setItem(MG_CACHE_KEY, JSON.stringify({db, ts:Date.now()})); } catch(e){}
-}
-
-// ── Lecture DB (async — retourne Promise<db>)
-async function MG_loadDB() {
-  // Si pas de BIN configuré → fallback localStorage (mode dev local)
-  if (!MG_BIN_ID || !MG_BIN_KEY) {
-    try {
-      const raw = localStorage.getItem('mg_db_v1');
-      if (!raw) { const db={users:{},employees:[],invoices:[]}; return db; }
-      const db = JSON.parse(raw);
-      if (!db.employees) db.employees=[];
-      if (!db.invoices)  db.invoices=[];
-      return db;
-    } catch(e) { return {users:{},employees:[],invoices:[]}; }
-  }
+function MG_loadDB() {
   try {
-    const res = await fetch(MG_BIN_URL()+'/latest', { headers: MG_HEADERS() });
-    if (!res.ok) throw new Error('HTTP '+res.status);
-    const json = await res.json();
-    const db = json.record || json;
+    const raw = localStorage.getItem(MG_DB_KEY);
+    if (!raw) { const db={users:{},employees:[],invoices:[]}; MG_saveDB(db); return db; }
+    const db = JSON.parse(raw);
     if (!db.employees) db.employees=[];
     if (!db.invoices)  db.invoices=[];
-    MG_setCache(db);
     return db;
-  } catch(e) {
-    console.warn('JSONBin read failed, using cache:', e);
-    const c = MG_getCached();
-    return c ? c.db : {users:{},employees:[],invoices:[]};
-  }
+  } catch(e) { return {users:{},employees:[],invoices:[]}; }
 }
+function MG_saveDB(db) { localStorage.setItem(MG_DB_KEY, JSON.stringify(db)); }
 
-// ── Écriture DB (async — retourne Promise<void>)
-async function MG_saveDB(db) {
-  MG_setCache(db);  // toujours sauver en cache local d'abord
-  if (!MG_BIN_ID || !MG_BIN_KEY) {
-    try { localStorage.setItem('mg_db_v1', JSON.stringify(db)); } catch(e){}
-    return;
-  }
-  try {
-    await fetch(MG_BIN_URL(), {
-      method: 'PUT',
-      headers: MG_HEADERS(),
-      body: JSON.stringify(db)
-    });
-  } catch(e) { console.warn('JSONBin write failed:', e); }
-}
+function MG_getUser(uid)      { return MG_loadDB().users[uid] || null; }
+function MG_getAllUsers()      { return Object.values(MG_loadDB().users); }
+function MG_getUserByEmail(e) { return MG_getAllUsers().find(u => u.email===e) || null; }
 
-// ── USER CRUD (toutes async — appellent await MG_loadDB/saveDB)
-async function MG_getUser(uid)      { const db=await MG_loadDB(); return db.users[uid]||null; }
-async function MG_getAllUsers()      { const db=await MG_loadDB(); return Object.values(db.users); }
-async function MG_getUserByEmail(e) { return (await MG_getAllUsers()).find(u=>u.email===e)||null; }
-
-async function MG_getEmployeeEmails() {
-  try { return (await MG_loadDB()).employees || []; } catch(e) { return []; }
-}
-async function MG_isEmployee(email) {
-  if (MG_isAdmin(email)) return true;
-  return (await MG_getEmployeeEmails()).includes(email);
-}
-
-async function MG_upsertUser(uid, data) {
-  const db = await MG_loadDB();
-  let role = 'client';
-  if (MG_isAdmin(data.email)) {
-    role = 'admin';
-  } else if ((db.employees||[]).includes(data.email)) {
-    role = 'employee';
-  } else if (db.users[uid] && db.users[uid].role && db.users[uid].role !== 'client') {
-    role = db.users[uid].role;
-  }
+function MG_upsertUser(uid, data) {
+  const db = MG_loadDB();
+  const role = MG_isAdmin(data.email) ? 'admin' : MG_isEmployee(data.email) ? 'employee' : 'client';
   if (!db.users[uid]) {
     db.users[uid] = { uid, name:data.name, email:data.email,
       avatar:(data.name||'?')[0].toUpperCase(), role, personnages:[], createdAt:MG_today() };
@@ -218,92 +155,89 @@ async function MG_upsertUser(uid, data) {
     Object.assign(db.users[uid], { name:data.name, email:data.email,
       avatar:(data.name||'?')[0].toUpperCase(), role });
   }
-  await MG_saveDB(db);
+  MG_saveDB(db);
   return db.users[uid];
 }
 
-async function MG_addPersonnage(uid, prenom, nom) {
-  const db = await MG_loadDB();
+function MG_addPersonnage(uid, prenom, nom) {
+  const db = MG_loadDB();
   if (!db.users[uid]) return null;
   const p = { id:'p_'+Date.now(), prenom, nom, points:0, contract:null,
     contractSince:null, loyaltyActive:false, history:[], createdAt:MG_today() };
   db.users[uid].personnages.push(p);
-  await MG_saveDB(db);
+  MG_saveDB(db);
   return p;
 }
-async function MG_updatePersonnage(uid, pid, updates) {
-  const db = await MG_loadDB();
-  const user = db.users[uid]; if (!user) return false;
-  const idx = user.personnages.findIndex(p=>p.id===pid); if (idx===-1) return false;
+function MG_updatePersonnage(uid, pid, updates) {
+  const db=MG_loadDB(), user=db.users[uid];
+  if (!user) return false;
+  const idx=user.personnages.findIndex(p=>p.id===pid);
+  if (idx===-1) return false;
   Object.assign(user.personnages[idx], updates);
-  await MG_saveDB(db); return true;
+  MG_saveDB(db); return true;
 }
-async function MG_deletePersonnage(uid, pid) {
-  const db = await MG_loadDB();
-  const user = db.users[uid]; if (!user) return false;
-  user.personnages = user.personnages.filter(p=>p.id!==pid);
-  await MG_saveDB(db); return true;
+function MG_deletePersonnage(uid, pid) {
+  const db=MG_loadDB(), user=db.users[uid];
+  if (!user) return false;
+  user.personnages=user.personnages.filter(p=>p.id!==pid);
+  MG_saveDB(db); return true;
 }
 
 // ── EMPLOYEE MANAGEMENT
-async function MG_addEmployee(email) {
-  const db = await MG_loadDB();
+function MG_addEmployee(email) {
+  const db=MG_loadDB();
   if (!db.employees.includes(email)) db.employees.push(email);
-  Object.values(db.users).forEach(u => { if (u.email===email) u.role='employee'; });
-  await MG_saveDB(db);
+  const user=Object.values(db.users).find(u=>u.email===email);
+  if (user) user.role='employee';
+  MG_saveDB(db);
 }
-async function MG_removeEmployee(email) {
-  const db = await MG_loadDB();
-  db.employees = db.employees.filter(e=>e!==email);
-  Object.values(db.users).forEach(u => { if (u.email===email && u.role==='employee') u.role='client'; });
-  await MG_saveDB(db);
+function MG_removeEmployee(email) {
+  const db=MG_loadDB();
+  db.employees=db.employees.filter(e=>e!==email);
+  const user=Object.values(db.users).find(u=>u.email===email);
+  if (user && user.role==='employee') user.role='client';
+  MG_saveDB(db);
 }
 
 // ── INVOICES
-async function MG_saveInvoice(inv) {
-  const db = await MG_loadDB(); db.invoices.push(inv); await MG_saveDB(db);
+function MG_saveInvoice(inv) {
+  const db=MG_loadDB(); db.invoices.push(inv); MG_saveDB(db);
 }
-async function MG_getInvoices() { return (await MG_loadDB()).invoices||[]; }
+function MG_getInvoices() { return MG_loadDB().invoices||[]; }
+
+// ── SESSION
+function MG_getSession()     { try { return JSON.parse(sessionStorage.getItem(MG_SESSION_KEY)); } catch(e) { return null; } }
+function MG_setSession(data) { sessionStorage.setItem(MG_SESSION_KEY, JSON.stringify(data)); }
+function MG_clearSession()   { sessionStorage.removeItem(MG_SESSION_KEY); }
+
+// ── JWT DECODE
+function MG_decodeJWT(token) {
+  try {
+    const b64=token.split('.')[1].replace(/-/g,'+').replace(/_/g,'/');
+    return JSON.parse(decodeURIComponent(atob(b64).split('').map(c=>'%'+('00'+c.charCodeAt(0).toString(16)).slice(-2)).join('')));
+  } catch(e) { return null; }
+}
 
 // ── GOOGLE GSI LOGIN
-// GSI LOGIN — renderButton direct, pas de prompt()
-// onGoogleLibraryLoad est le seul callback fiable avec async/defer
-let _gsiPendingCb = null;
-
 function MG_googleLogin(callback) {
-  _gsiPendingCb = callback;
-  if (typeof google !== 'undefined' && google.accounts && google.accounts.id) {
-    _MG_initGSI(callback);
-  }
-}
-
-function onGoogleLibraryLoad() {
-  if (_gsiPendingCb) _MG_initGSI(_gsiPendingCb);
-}
-
-function _MG_initGSI(callback) {
+  if (typeof google==='undefined') { console.error('GSI not loaded'); return; }
   google.accounts.id.initialize({
     client_id: MG_GOOGLE_CLIENT_ID,
-    ux_mode: 'popup',
-    callback: async (resp) => {
-      const payload = MG_decodeJWT(resp.credential);
-      if (!payload) { alert('Erreur Google. Réessayez.'); return; }
-      const uid = 'g_' + payload.sub;
-      const user = await MG_upsertUser(uid, { name: payload.name, email: payload.email });
-      MG_setSession({ uid, email: payload.email });
+    callback: (resp) => {
+      const payload=MG_decodeJWT(resp.credential);
+      if (!payload) { alert('Erreur de connexion Google. Réessayez.'); return; }
+      const uid='g_'+payload.sub;
+      const user=MG_upsertUser(uid, { name:payload.name, email:payload.email });
+      MG_setSession({ uid, email:payload.email });
       if (callback) callback(user);
     },
+    auto_select: false,
+    cancel_on_tap_outside: true,
   });
-  // Affiche le bouton dans tous les conteneurs déclarés
-  ['_gsi_btn', '_gsi_emp'].forEach(id => {
-    const el = document.getElementById(id);
-    if (el) {
-      el.innerHTML = '';
-      google.accounts.id.renderButton(el, {
-        theme: 'filled_black', size: 'large',
-        text: 'continue_with', shape: 'rectangular',
-        width: 320, locale: 'fr'
-      });
+  google.accounts.id.prompt((n)=>{
+    if (n.isSkippedMoment()||n.isDismissedMoment()) {
+      const btn=document.getElementById('_gsi_btn');
+      if (btn) { btn.innerHTML=''; google.accounts.id.renderButton(btn,{theme:'filled_black',size:'large',text:'continue_with',shape:'rectangular',width:320}); }
     }
   });
 }
