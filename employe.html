@@ -273,22 +273,26 @@ async function MG_saveInvoice(inv) {
 async function MG_getInvoices() { return (await MG_loadDB()).invoices||[]; }
 
 // ── GOOGLE GSI LOGIN
-// GSI LOGIN — renderButton direct, pas de prompt()
-// onGoogleLibraryLoad est le seul callback fiable avec async/defer
-let _gsiPendingCb = null;
+// Double-guard : fonctionne peu importe l'ordre DOMContentLoaded vs onGoogleLibraryLoad.
+// Cas 1 : GSI charge avant MG_googleLogin() → _gsiReady=true, init au moment de l'appel
+// Cas 2 : MG_googleLogin() appelé avant GSI → _gsiCb stocké, init dans onGoogleLibraryLoad
+let _gsiCb = null;
+let _gsiReady = false;
+let _gsiInited = false;
 
 function MG_googleLogin(callback) {
-  _gsiPendingCb = callback;
-  if (typeof google !== 'undefined' && google.accounts && google.accounts.id) {
-    _MG_initGSI(callback);
-  }
+  _gsiCb = callback;
+  if (_gsiReady) _MG_initGSI();
 }
 
 function onGoogleLibraryLoad() {
-  if (_gsiPendingCb) _MG_initGSI(_gsiPendingCb);
+  _gsiReady = true;
+  if (_gsiCb) _MG_initGSI();
 }
 
-function _MG_initGSI(callback) {
+function _MG_initGSI() {
+  if (_gsiInited) { _MG_renderButtons(); return; }
+  _gsiInited = true;
   google.accounts.id.initialize({
     client_id: MG_GOOGLE_CLIENT_ID,
     ux_mode: 'popup',
@@ -298,10 +302,13 @@ function _MG_initGSI(callback) {
       const uid = 'g_' + payload.sub;
       const user = await MG_upsertUser(uid, { name: payload.name, email: payload.email });
       MG_setSession({ uid, email: payload.email });
-      if (callback) callback(user);
+      if (_gsiCb) _gsiCb(user);
     },
   });
-  // Affiche le bouton dans tous les conteneurs déclarés
+  _MG_renderButtons();
+}
+
+function _MG_renderButtons() {
   ['_gsi_btn', '_gsi_emp'].forEach(id => {
     const el = document.getElementById(id);
     if (el) {

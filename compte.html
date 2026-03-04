@@ -273,22 +273,26 @@ async function MG_saveInvoice(inv) {
 async function MG_getInvoices() { return (await MG_loadDB()).invoices||[]; }
 
 // ── GOOGLE GSI LOGIN
-// GSI LOGIN — renderButton direct, pas de prompt()
-// onGoogleLibraryLoad est le seul callback fiable avec async/defer
-let _gsiPendingCb = null;
+// Double-guard : fonctionne peu importe l'ordre DOMContentLoaded vs onGoogleLibraryLoad.
+// Cas 1 : GSI charge avant MG_googleLogin() → _gsiReady=true, init au moment de l'appel
+// Cas 2 : MG_googleLogin() appelé avant GSI → _gsiCb stocké, init dans onGoogleLibraryLoad
+let _gsiCb = null;
+let _gsiReady = false;
+let _gsiInited = false;
 
 function MG_googleLogin(callback) {
-  _gsiPendingCb = callback;
-  if (typeof google !== 'undefined' && google.accounts && google.accounts.id) {
-    _MG_initGSI(callback);
-  }
+  _gsiCb = callback;
+  if (_gsiReady) _MG_initGSI();
 }
 
 function onGoogleLibraryLoad() {
-  if (_gsiPendingCb) _MG_initGSI(_gsiPendingCb);
+  _gsiReady = true;
+  if (_gsiCb) _MG_initGSI();
 }
 
-function _MG_initGSI(callback) {
+function _MG_initGSI() {
+  if (_gsiInited) { _MG_renderButtons(); return; }
+  _gsiInited = true;
   google.accounts.id.initialize({
     client_id: MG_GOOGLE_CLIENT_ID,
     ux_mode: 'popup',
@@ -298,10 +302,13 @@ function _MG_initGSI(callback) {
       const uid = 'g_' + payload.sub;
       const user = await MG_upsertUser(uid, { name: payload.name, email: payload.email });
       MG_setSession({ uid, email: payload.email });
-      if (callback) callback(user);
+      if (_gsiCb) _gsiCb(user);
     },
   });
-  // Affiche le bouton dans tous les conteneurs déclarés
+  _MG_renderButtons();
+}
+
+function _MG_renderButtons() {
   ['_gsi_btn', '_gsi_emp'].forEach(id => {
     const el = document.getElementById(id);
     if (el) {
@@ -494,7 +501,7 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px 80px
   <div class="nav-right" id="navRight"><a href="https://discord.gg/zwn6Pn3TWJ" target="_blank" class="btn-discord"><svg width="16" height="16" viewBox="0 0 71 55" fill="white"><path d="M60.1 4.9A58.8 58.8 0 0 0 45.8.7a.2.2 0 0 0-.2.1 41 41 0 0 0-1.8 3.7 54.3 54.3 0 0 0-16.3 0A37.9 37.9 0 0 0 25.6.8a.2.2 0 0 0-.2-.1A58.6 58.6 0 0 0 11 4.9a.2.2 0 0 0-.1.1C1.6 18.7-1 32.2.3 45.5a.2.2 0 0 0 .1.2 59.1 59.1 0 0 0 17.8 9 .2.2 0 0 0 .3-.1 42.2 42.2 0 0 0 3.6-5.9.2.2 0 0 0-.1-.3 38.9 38.9 0 0 1-5.6-2.7.2.2 0 0 1 0-.4l1.1-.9a.2.2 0 0 1 .2 0c11.8 5.4 24.6 5.4 36.3 0a.2.2 0 0 1 .2 0l1.1.9a.2.2 0 0 1 0 .4 36.8 36.8 0 0 1-5.6 2.7.2.2 0 0 0-.1.3 47.3 47.3 0 0 0 3.6 5.9.2.2 0 0 0 .3.1 58.9 58.9 0 0 0 17.9-9 .2.2 0 0 0 .1-.2c1.5-15.5-2.5-29-10.6-41a.2.2 0 0 0-.1 0zM23.7 37.3c-3.5 0-6.4-3.2-6.4-7.2s2.8-7.2 6.4-7.2c3.6 0 6.5 3.3 6.4 7.2 0 3.9-2.8 7.2-6.4 7.2zm23.7 0c-3.5 0-6.4-3.2-6.4-7.2s2.8-7.2 6.4-7.2c3.6 0 6.5 3.3 6.4 7.2 0 3.9-2.8 7.2-6.4 7.2z"/></svg> Rejoindre</a></div>
 </nav>
 
-<div class="login-gate" id="loginGate">
+<div class="login-gate" id="loginGate" style="display:none">
   <div class="login-box">
     <div class="login-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/><path d="M12 6c1.93 0 3.5 1.57 3.5 3.5S13.93 13 12 13s-3.5-1.57-3.5-3.5S10.07 6 12 6zM12 14c3.33 0 6 1.34 6 3v1H6v-1c0-1.66 2.67-3 6-3z"/></svg></div>
     <h1>Espace Client</h1>
