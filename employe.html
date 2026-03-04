@@ -309,20 +309,29 @@ function _MG_initGSI() {
 }
 
 function _MG_renderButtons() {
-  // requestAnimationFrame : attend que le navigateur ait peint le DOM
-  // et calculé les dimensions AVANT que Google mesure le conteneur
-  requestAnimationFrame(() => {
+  // Double rAF + fallback 300ms pour garantir que le layout est calculé
+  // avant que Google mesure le conteneur (offsetWidth > 0 requis)
+  function tryRender(attempt) {
     ['_gsi_btn', '_gsi_emp'].forEach(id => {
       const el = document.getElementById(id);
-      if (!el || el.offsetWidth === 0) return;
-      el.innerHTML = '';
-      google.accounts.id.renderButton(el, {
-        theme: 'filled_black', size: 'large',
-        text: 'continue_with', shape: 'rectangular',
-        width: 320, locale: 'fr'
-      });
+      if (!el) return;
+      // Si le div est visible et a une largeur, on peut rendre
+      if (el.offsetWidth > 0) {
+        el.innerHTML = '';
+        try {
+          google.accounts.id.renderButton(el, {
+            theme: 'filled_black', size: 'large',
+            text: 'continue_with', shape: 'rectangular',
+            width: Math.min(320, el.offsetWidth || 320), locale: 'fr'
+          });
+        } catch(e) { console.warn('GSI renderButton error:', e); }
+      } else if (attempt < 5) {
+        // Réessayer jusqu'à 5 fois avec délai croissant
+        setTimeout(() => tryRender(attempt + 1), 100 * attempt);
+      }
     });
-  });
+  }
+  requestAnimationFrame(() => requestAnimationFrame(() => tryRender(1)));
 }
 
 // ── TOAST
