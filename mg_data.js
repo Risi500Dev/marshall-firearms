@@ -252,3 +252,5 @@ function MG_toast(title,msg,type='gold'){
   el.classList.add('show'); clearTimeout(el._t);
   el._t=setTimeout(()=>el.classList.remove('show'),3800);
 }
+const MG_BIN_ID  = '69a875dcae596e708f5f4087';
+const MG_BIN_KEY = '$2a$10$Ei8gHO.1TIVfe2hyudxmx.uhrB1oJKAL.IlcTPDY6LHmjGHQDuivS';
