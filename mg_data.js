@@ -127,8 +127,8 @@ function MG_invoiceId() { return 'MF-' + Date.now().toString(36).toUpperCase().s
 
 // ── DB — JSONBin.io (base partagée entre tous les navigateurs)
 // Bin ID et Master Key à configurer ci-dessous après création sur jsonbin.io
-const MG_BIN_ID    = '';   // ex: '65f3a...' — créer sur https://jsonbin.io
-const MG_BIN_KEY   = '';   // Master Key JSONBin (commence par $2b$...)
+const MG_BIN_ID    = '69a875dcae596e708f5f4087';   // ex: '65f3a...' — créer sur https://jsonbin.io
+const MG_BIN_KEY   = '$2a$10$Ei8gHO.1TIVfe2hyudxmx.uhrB1oJKAL.IlcTPDY6LHmjGHQDuivS';   // Master Key JSONBin (commence par $2b$...)
 const MG_SESSION_KEY = 'mg_session_v1';
 // ── Session (localStorage)
 function MG_getSession() {
