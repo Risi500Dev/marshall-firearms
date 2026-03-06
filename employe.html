@@ -36,64 +36,64 @@ const MG_FIREBASE_CONFIG = {
 
 // ── TIERS
 const MG_TIERS = [
-  { name:'Bronze',    min:0,     max:1000,   dot:'#cd7f32', color:'#cd7f32',
-    perks:['1 boîte de munitions offerte à chaque achat'] },
-  { name:'Argent',    min:1000,  max:3500,   dot:'#a8a9ad', color:'#a8a9ad',
-    perks:['3 boîtes de munitions offertes à chaque achat','Avantages Bronze inclus'] },
-  { name:'Or',        min:3500,  max:10000,  dot:'#c8a84b', color:'#c8a84b',
-    perks:['Achat gilet léger = second offert','Avantages Bronze & Argent inclus'] },
+  { name:'Bronze',    min:0,     max:999,   dot:'#cd7f32', color:'#cd7f32',
+    perks:['1 Boîte de munitions offerte à chaque achat'] },
+  { name:'Argent',    min:1000,  max:4999,   dot:'#a8a9ad', color:'#a8a9ad',
+    perks:['3 Boîte de munitions offerte à chaque achat','Avantages Bronze inclus'] },
+  { name:'Or',        min:5000,  max:9999,  dot:'#c8a84b', color:'#c8a84b',
+    perks:['Achat gilet = second offert','Avantages Bronze & Argent inclus'] },
   { name:'Platinium', min:10000, max:999999, dot:'#a0b2c8', color:'#a0b2c8',
-    perks:['1 arme de poing offerte par mois','Tous les avantages précédents inclus'] },
+    perks:['1 Arme de poing offerte/mois','Tous les avantages précédents inclus'] },
 ];
 
 // ── CONTRATS
 const MG_CONTRACTS = {
   particulier: {
-    label:'Contrat Particulier', price:5000, period:'par mois', discount:0,
-    perks:['Marge divisée par 2','Munitions offertes à chaque commande','Commandes prioritaires','Accès batteuses : Minimi, RPK-12 & MG36']
+    label:'Contrat Particulier', price:10000, period:'par mois', discount:0,
+    perks:['Accès aux commandes via le site','Commandes prioritaires','Marge entreprise divisée par 2', 'Munitions Offertes', 'Accès Batteuses & Explosifs']
   },
   entreprise: {
-    label:'Contrat Entreprise', price:15000, period:'par mois', discount:10,
-    perks:['Marge divisée par 2','Munitions offertes à chaque commande','Commandes prioritaires','Gestionnaire de compte dédié','Approvisionnement hebdomadaire garanti']
+    label:'Contrat Entreprise', price:5000, period:'par mois', discount:10,
+    perks:['Accès aux commandes via le site','Commandes prioritaires','Marge entreprise divisée par 2', 'Munitions Offertes']
   }
 };
 
 // ── CATALOGUE
 const MG_CATALOGUE = [
   // Pistolets
-  { name:'MK23',           cat:'pistolet',  mode:'Semi',     cal:'11.43mm',    mag:12,  price:4950,  marge:0, spec:false },
-  { name:'M9',             cat:'pistolet',  mode:'Semi',     cal:'9mm',        mag:15,  price:4950,  marge:0, spec:false },
-  { name:'P320',           cat:'pistolet',  mode:'Semi',     cal:'9mm',        mag:17,  price:4950,  marge:0, spec:false },
-  { name:'FNP-45',         cat:'pistolet',  mode:'Semi',     cal:'11.43mm',    mag:15,  price:4950,  marge:0, spec:false },
-  { name:'Glock 19',       cat:'pistolet',  mode:'Semi',     cal:'9mm',        mag:15,  price:4950,  marge:0, spec:false },
+  { name:'MK23',           cat:'pistolet',  mode:'Semi',     cal:'45 .ACP',    mag:12,  price:4950,  marge:0, spec:false },
+  { name:'M9',             cat:'pistolet',  mode:'Semi',     cal:'9 x 19mm',   mag:15,  price:4950,  marge:0, spec:false },
+  { name:'P320',           cat:'pistolet',  mode:'Semi',     cal:'9 x 19mm',   mag:17,  price:4950,  marge:0, spec:false },
+  { name:'FNP-45',         cat:'pistolet',  mode:'Semi',     cal:'45 .ACP',    mag:15,  price:4950,  marge:0, spec:false },
+  { name:'Glock 19',       cat:'pistolet',  mode:'Semi',     cal:'9 x 19mm',   mag:15,  price:4950,  marge:0, spec:false },
   { name:'Five-seveN MK2', cat:'pistolet',  mode:'Semi',     cal:'5.7×28mm',   mag:20,  price:4950,  marge:0, spec:false },
-  { name:'Glock 17',       cat:'pistolet',  mode:'Semi',     cal:'9mm',        mag:17,  price:4950,  marge:0, spec:false },
-  { name:'CZ 75',          cat:'pistolet',  mode:'Semi',     cal:'9mm',        mag:16,  price:4950,  marge:0, spec:false },
-  { name:'Colt M45',       cat:'pistolet',  mode:'Semi',     cal:'11.43mm',    mag:8,   price:4950,  marge:0, spec:false },
-  { name:'P99',            cat:'pistolet',  mode:'Semi',     cal:'9mm',        mag:16,  price:3850,  marge:0, spec:false },
-  { name:'USP',            cat:'pistolet',  mode:'Semi',     cal:'9mm',        mag:15,  price:4950,  marge:0, spec:true  },
-  { name:'SW659',          cat:'pistolet',  mode:'Semi',     cal:'9mm',        mag:14,  price:4950,  marge:0, spec:true  },
-  { name:'KNW',            cat:'pistolet',  mode:'Auto',     cal:'9mm',        mag:20,  price:4950,  marge:0, spec:true  },
+  { name:'Glock 17',       cat:'pistolet',  mode:'Semi',     cal:'9 x 19mm',   mag:17,  price:4950,  marge:0, spec:false },
+  { name:'CZ 75',          cat:'pistolet',  mode:'Semi',     cal:'9 x 19mm',   mag:16,  price:4950,  marge:0, spec:false },
+  { name:'Colt M45',       cat:'pistolet',  mode:'Semi',     cal:'45 .ACP',    mag:8,   price:4950,  marge:0, spec:false },
+  { name:'P99',            cat:'pistolet',  mode:'Semi',     cal:'9 x 19mm',   mag:16,  price:3850,  marge:0, spec:false },
+  { name:'USP',            cat:'pistolet',  mode:'Semi',     cal:'9 x 19mm',   mag:15,  price:4950,  marge:0, spec:true  },
+  { name:'SW659',          cat:'pistolet',  mode:'Semi',     cal:'9 x 19mm',   mag:14,  price:4950,  marge:0, spec:true  },
+  { name:'KNW',            cat:'pistolet',  mode:'Semi',     cal:'9 x 19mm',   mag:20,  price:4950,  marge:0, spec:true  },
   // Revolvers
-  { name:'MR 96',          cat:'revolver',  mode:'Revolver', cal:'.357 Mag',   mag:6,   price:4950,  marge:0, spec:false },
-  { name:'MR 73',          cat:'revolver',  mode:'Revolver', cal:'.357 Mag',   mag:6,   price:3850,  marge:0, spec:false },
-  { name:'Desert Eagle',   cat:'revolver',  mode:'Semi',     cal:'.50 AE',     mag:7,   price:4950,  marge:0, spec:true  },
-  { name:'Thanez Cobra',   cat:'revolver',  mode:'Semi',     cal:'.357 Magnum',mag:'6',  price:4500,  marge:0, spec:true  },
+  { name:'MR 96',          cat:'revolver',  mode:'Semi',     cal:'.357 Mag',   mag:6,   price:4950,  marge:0, spec:false },
+  { name:'MR 73',          cat:'revolver',  mode:'Semi',     cal:'.357 Mag',   mag:6,   price:3850,  marge:0, spec:false },
+  { name:'Desert Eagle',   cat:'revolver',  mode:'Semi',     cal:'.357 Mag',   mag:7,   price:4950,  marge:0, spec:true  },
+  { name:'Thanez Cobra',   cat:'revolver',  mode:'Semi',     cal:'.357 Mag',   mag:'6',  price:4500,  marge:0, spec:true  },
   // SMG
-  { name:'MP5',            cat:'smg',       mode:'Auto',     cal:'9mm',        mag:30,  price:13200, marge:0, spec:false },
-  { name:'UMP-45',         cat:'smg',       mode:'Auto',     cal:'11.43mm',    mag:25,  price:13200, marge:0, spec:false },
+  { name:'MP5',            cat:'smg',       mode:'Auto',     cal:'9 x 19mm',   mag:30,  price:13200, marge:0, spec:false },
+  { name:'UMP-45',         cat:'smg',       mode:'Auto',     cal:'45 .ACP',    mag:25,  price:13200, marge:0, spec:false },
   { name:'MP7',            cat:'smg',       mode:'Auto',     cal:'4.6×30mm',   mag:40,  price:12000,  marge:0, spec:false },
   { name:'Kriss Vector',   cat:'smg',       mode:'Auto',     cal:'11.43mm',    mag:25,  price:13200, marge:0, spec:true  },
-  { name:'MP9',            cat:'smg',       mode:'Auto',     cal:'9mm',        mag:32,  price:9900,  marge:0, spec:true  },
-  { name:'Uzi',            cat:'smg',       mode:'Auto',     cal:'9mm',        mag:32,  price:8800,  marge:0, spec:true  },
+  { name:'MP9',            cat:'smg',       mode:'Auto',     cal:'9 x 19mm',   mag:32,  price:9900,  marge:0, spec:true  },
+  { name:'Uzi',            cat:'smg',       mode:'Auto',     cal:'9 x 19mm',   mag:32,  price:8800,  marge:0, spec:true  },
   // Assaut
-  { name:'RFB',            cat:'assaut',    mode:'Semi',     cal:'7.62×51mm',  mag:20,  price:49500, marge:0, spec:false },
+  { name:'RFB',            cat:'assaut',    mode:'Auto',     cal:'7.62×51mm',  mag:20,  price:49500, marge:0, spec:false },
   { name:'Scar-H',         cat:'assaut',    mode:'Auto',     cal:'7.62×51mm',  mag:20,  price:24200, marge:0, spec:false },
   { name:'Scar-L',         cat:'assaut',    mode:'Auto',     cal:'5.56×45mm',  mag:30,  price:16500, marge:0, spec:false },
   { name:'MK 18',          cat:'assaut',    mode:'Auto',     cal:'5.56×45mm',  mag:30,  price:16500, marge:0, spec:false },
   { name:'MK 18 Mod',      cat:'assaut',    mode:'Auto',     cal:'5.56×45mm',  mag:30,  price:16500, marge:0, spec:false },
   { name:'M4A1',           cat:'assaut',    mode:'Auto',     cal:'5.56×45mm',  mag:30,  price:16500, marge:0, spec:false },
-  { name:'AR-15',          cat:'assaut',    mode:'Semi',     cal:'5.56×45mm',  mag:30,  price:16500, marge:0, spec:false },
+  { name:'AR-15',          cat:'assaut',    mode:'Auto',     cal:'5.56×45mm',  mag:30,  price:16500, marge:0, spec:false },
   { name:'HK 416',         cat:'assaut',    mode:'Auto',     cal:'5.56×45mm',  mag:30,  price:16500, marge:0, spec:false },
   { name:'G36C',           cat:'assaut',    mode:'Auto',     cal:'5.56×45mm',  mag:30,  price:16500, marge:0, spec:false },
   { name:'CZ 805',         cat:'assaut',    mode:'Auto',     cal:'5.56×45mm',  mag:30,  price:16500, marge:0, spec:false },
@@ -115,13 +115,13 @@ const MG_CATALOGUE = [
   { name:'M98',            cat:'precision', mode:'Semi',     cal:'.338 Lapua', mag:5,   price:52500, marge:0,  spec:true  },
   { name:'M82',            cat:'precision', mode:'Semi',     cal:'.50 BMG',    mag:10,  price:52500, marge:0,  spec:true  },
   // Pompe
-  { name:'M870',           cat:'pompe',     mode:'Pompe',    cal:'12 Gauge',   mag:7,   price:13200, marge:0, spec:false },
-  { name:'Nova',           cat:'pompe',     mode:'Pompe',    cal:'12 Gauge',   mag:8,   price:13200, marge:0, spec:false },
-  { name:'M590',           cat:'pompe',     mode:'Pompe',    cal:'12 Gauge',   mag:9,   price:13200, marge:0, spec:false },
-  { name:'M500',           cat:'pompe',     mode:'Pompe',    cal:'12 Gauge',   mag:5,   price:17500, marge:0, spec:true  },
-  { name:'SPAS-12',        cat:'pompe',     mode:'Pompe',    cal:'12 Gauge',   mag:8,   price:13200, marge:0, spec:true  },
-  { name:'Fort 500',       cat:'pompe',     mode:'Pompe',    cal:'12 Gauge',   mag:7,   price:13200, marge:0, spec:true  },
-  { name:'Toz 194',        cat:'pompe',     mode:'Pompe',    cal:'12 Gauge',   mag:6,   price:13200, marge:0, spec:true  },
+  { name:'M870',           cat:'pompe',     mode:'Semi',     cal:'12 Gauge',   mag:7,   price:13200, marge:0, spec:false },
+  { name:'Nova',           cat:'pompe',     mode:'Semi',     cal:'12 Gauge',   mag:8,   price:13200, marge:0, spec:false },
+  { name:'M590',           cat:'pompe',     mode:'Semi',     cal:'12 Gauge',   mag:9,   price:13200, marge:0, spec:false },
+  { name:'M500',           cat:'pompe',     mode:'Semi',     cal:'12 Gauge',   mag:5,   price:17500, marge:0, spec:true  },
+  { name:'SPAS-12',        cat:'pompe',     mode:'Semi',     cal:'12 Gauge',   mag:8,   price:13200, marge:0, spec:true  },
+  { name:'Fort 500',       cat:'pompe',     mode:'Semi',     cal:'12 Gauge',   mag:7,   price:13200, marge:0, spec:true  },
+  { name:'Toz 194',        cat:'pompe',     mode:'Semi',     cal:'12 Gauge',   mag:6,   price:13200, marge:0, spec:true  },
   // Munitions
   { name:'Munitions Pistolet',       cat:'munitions',  mode:'—', cal:'9mm / .45',    mag:null, price:100,  marge:0, spec:false },
   { name:'Munitions .357',           cat:'munitions',  mode:'—', cal:'.357 Mag',     mag:null, price:120,  marge:0, spec:false },
