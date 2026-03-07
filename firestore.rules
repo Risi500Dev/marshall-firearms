@@ -1,0 +1,70 @@
+// firestore.rules
+// Règles de sécurité Firebase Firestore pour Marshall Corporation
+
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Helpers
+    function isAuth() { return request.auth != null; }
+    function isOwner(uid) { return request.auth.uid == uid; }
+    function getUser() { return get(/databases/$(database)/documents/users/$(request.auth.uid)).data; }
+    function isEmployee() { return isAuth() && (getUser().role == 'employee' || getUser().role == 'admin'); }
+    function isAdmin() { return isAuth() && getUser().role == 'admin'; }
+    function isAdminEmail() { return request.auth.token.email == 'william.lautrec92enc.off@gmail.com'; }
+
+    // Users collection
+    match /users/{uid} {
+      allow read: if isAuth() && (isOwner(uid) || isEmployee());
+      allow create: if isAuth() && isOwner(uid);
+      allow update: if isAuth() && (isOwner(uid) || isEmployee());
+      allow delete: if isAdmin();
+
+      // Characters sub-collection
+      match /characters/{charId} {
+        allow read: if isAuth() && (isOwner(uid) || isEmployee());
+        allow create: if isAuth() && isOwner(uid);
+        allow update: if isAuth() && (isOwner(uid) || isEmployee());
+        allow delete: if isAuth() && isOwner(uid);
+      }
+    }
+
+    // Contracts (public read, admin write)
+    match /contracts/{contractId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // Shops (public read, admin write)
+    match /shops/{shopId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // Products (public read, admin write)
+    match /products/{productId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // Orders (owner read, employee/admin write)
+    match /orders/{orderId} {
+      allow read: if isAuth() && (resource.data.userUid == request.auth.uid || isEmployee());
+      allow create: if isEmployee();
+      allow update: if isEmployee();
+      allow delete: if isAdmin();
+    }
+
+    // Employees (employee/admin read, admin write)
+    match /employees/{empId} {
+      allow read: if isEmployee();
+      allow write: if isAdmin();
+    }
+
+    // Admins (admin only)
+    match /admins/{adminId} {
+      allow read: if isAdmin();
+      allow write: if isAdmin() || isAdminEmail();
+    }
+  }
+}
